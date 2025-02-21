@@ -23,5 +23,9 @@ RSpec.describe StringCalculator do
     it "returns 6 for '1,2,3,4'" do
       expect(calculator.add("1,2,3,4")).to eq(10)
     end
+
+    it "returns 6 for '1\n2,3'" do
+      expect(calculator.add("1\n2,3")).to eq(6)
+    end
   end
 end
