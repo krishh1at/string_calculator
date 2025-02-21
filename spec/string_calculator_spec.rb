@@ -40,6 +40,14 @@ RSpec.describe StringCalculator do
       it "returns 3 for '//;\n1;2'" do
         expect(calculator.add("//;\n1;2")).to eq(3)
       end
+
+      it "returns 9 for '//|\n2|3|4'" do
+        expect(calculator.add("//|\n2|3|4")).to eq(9)
+      end
+
+      it "returns 15 for '//-\n5-5-5'" do
+        expect(calculator.add("//-\n5-5-5")).to eq(15)
+      end
     end
   end
 end
