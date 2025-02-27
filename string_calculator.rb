@@ -1,8 +1,8 @@
 class StringCalculator
   def add(input)
-    0 if input.empty?
+    return 0 if input.empty?
 
-    delimiter = /,|\n/  # Default delimiters: comma `,` or newline `\n`
+    delimiter = /,|\n/ # Default delimiters: comma `,` or newline `\n`
 
     # Custom delimiter
     if input.start_with?("//")
