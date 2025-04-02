@@ -1,8 +1,8 @@
 class StringCalculator
+  DEFAULT_DELIMITER = /,|\n/.freeze # Default delimiters: comma `,` or newline `\n`
+
   def add(input)
     return 0 if input.empty?
-
-    delimiter = /,|\n/ # Default delimiters: comma `,` or newline `\n`
 
     # Custom delimiter
     if input.start_with?("//")
@@ -10,6 +10,8 @@ class StringCalculator
       delimiter = parts[0][2]
       input = parts[1]
     end
+
+    delimiter ||=  DEFAULT_DELIMITER
 
     # Split input string by delimiter and convert to integers
     numbers = input.split(delimiter).map(&:to_i)
