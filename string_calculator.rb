@@ -7,8 +7,7 @@ class StringCalculator
     custom_delimiter, input = extract_inputs(str)
     delimiter = custom_delimiter || DEFAULT_DELIMITER
 
-    # Split input string by delimiter and convert to integers
-    numbers = input.split(delimiter).map(&:to_i)
+    numbers = parse_numbers(input, delimiter)
 
     # Negative numbers not allowed
     negative_numbers = numbers.select { |n| n < 0 }
@@ -28,5 +27,10 @@ class StringCalculator
     input = parts[1]
 
     [delimiter, input]
+  end
+
+  # Parse numbers from the input string using the given delimiter
+  def parse_numbers(input, delimiter)
+    input.split(delimiter).map(&:to_i)
   end
 end
