@@ -1,17 +1,11 @@
 class StringCalculator
   DEFAULT_DELIMITER = /,|\n/.freeze # Default delimiters: comma `,` or newline `\n`
 
-  def add(input)
-    return 0 if input.empty?
+  def add(str)
+    return 0 if str.empty?
 
-    # Custom delimiter
-    if input.start_with?("//")
-      parts = input.split("\n", 2)
-      delimiter = parts[0][2]
-      input = parts[1]
-    end
-
-    delimiter ||=  DEFAULT_DELIMITER
+    custom_delimiter, input = extract_inputs(str)
+    delimiter = custom_delimiter || DEFAULT_DELIMITER
 
     # Split input string by delimiter and convert to integers
     numbers = input.split(delimiter).map(&:to_i)
@@ -21,5 +15,18 @@ class StringCalculator
     raise ArgumentError, "negative numbers not allowed: #{negative_numbers.join(", ")}" if negative_numbers.any?
 
     numbers.sum
+  end
+
+  private
+
+  # extract custom delimiter & input numbers
+  def extract_inputs(str)
+    return [nil, str] unless str.start_with?("//")
+
+    parts = str.split("\n", 2)
+    delimiter = parts[0][2]
+    input = parts[1]
+
+    [delimiter, input]
   end
 end
