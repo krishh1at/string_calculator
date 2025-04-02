@@ -8,10 +8,7 @@ class StringCalculator
     delimiter = custom_delimiter || DEFAULT_DELIMITER
 
     numbers = parse_numbers(input, delimiter)
-
-    # Negative numbers not allowed
-    negative_numbers = numbers.select { |n| n < 0 }
-    raise ArgumentError, "negative numbers not allowed: #{negative_numbers.join(", ")}" if negative_numbers.any?
+    validate_numbers(numbers)
 
     numbers.sum
   end
@@ -32,5 +29,11 @@ class StringCalculator
   # Parse numbers from the input string using the given delimiter
   def parse_numbers(input, delimiter)
     input.split(delimiter).map(&:to_i)
+  end
+
+  # Validate numbers (e.g., check for negatives)
+  def validate_numbers(numbers)
+    negative_numbers = numbers.select { |n| n < 0 }
+    raise ArgumentError, "negative numbers not allowed: #{negative_numbers.join(', ')}" if negative_numbers.any?
   end
 end
